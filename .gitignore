@@ -5,8 +5,9 @@ __pycache__/
 
 # Virtual environments
 venv/
-.env/
-.env
+
+# Environment variables
+backend/.env
 
 # IDEs and editors
 .vscode/
@@ -17,19 +18,12 @@ venv/
 *.log
 *.sqlite3
 
-# Environment variables
-.env
-
-# Pytest cache
+# Testing and analysis
 .pytest_cache/
-
-# MyPy
 .mypy_cache/
-
-# Coverage reports
-htmlcov/
 .coverage
 .coverage.*
+htmlcov/
 
 # Build artifacts
 build/
