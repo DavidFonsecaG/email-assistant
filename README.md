@@ -1,1 +1,1 @@
-# Sales Assistant
+# Email Assistant
