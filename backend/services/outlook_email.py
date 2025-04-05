@@ -2,12 +2,10 @@ import requests
 
 def send_outlook_email(token: str, to_email: str, subject: str, body_text: str):
     url = "https://graph.microsoft.com/v1.0/me/sendMail"
-
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
     }
-
     message = {
         "message": {
             "subject": subject,
@@ -24,7 +22,6 @@ def send_outlook_email(token: str, to_email: str, subject: str, body_text: str):
             ]
         }
     }
-
     response = requests.post(url, headers=headers, json=message)
 
     if response.status_code == 202:

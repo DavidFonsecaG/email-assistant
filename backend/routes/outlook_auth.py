@@ -41,9 +41,13 @@ def auth_callback(request: Request):
         redirect_uri=redirect_uri
     )
 
-    print("--> ", result)
-
     if "access_token" in result:
-        return {"access_token": result["access_token"]}
+        return {
+            "access_token": result["access_token"], 
+            "user_info": {
+                "name": result["id_token_claims"]["name"], 
+                "email": result["id_token_claims"]["preferred_username"]
+            }
+        }
     else:
         return {"error": result.get("error_description")}
