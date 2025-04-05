@@ -30,7 +30,8 @@ class EmailTable(Base):
 
     id = Column(String, primary_key=True)
     user_email = Column(String, index=True)
-    sender = Column(String)
+    sender_email = Column(String)
+    sender_name = Column(String)
     recipient = Column(String)
     subject = Column(String)
     body = Column(Text)

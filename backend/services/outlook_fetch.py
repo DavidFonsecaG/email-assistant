@@ -9,6 +9,9 @@ def fetch_recent_emails(access_token: str, max_results=10) -> List[Dict]:
     }
     response = requests.get(url, headers=headers)
 
+    for key, value in response.json().get("value", [])[0].items():
+        print(f"--> {key}: {value}")
+
     if response.status_code == 200:
         return response.json().get("value", [])
     else:
