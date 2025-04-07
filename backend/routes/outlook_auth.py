@@ -7,10 +7,10 @@ from msal import ConfidentialClientApplication
 load_dotenv()
 router = APIRouter()
 
-client_id = os.getenv("CLIENT_ID")
-client_secret = os.getenv("CLIENT_SECRET")
-tenant_id = os.getenv("TENANT_ID")
-redirect_uri = os.getenv("REDIRECT_URI")
+client_id = os.getenv("AZURE_CLIENT_ID")
+client_secret = os.getenv("AZURE_CLIENT_SECRET")
+tenant_id = os.getenv("AZURE_TENANT_ID")
+redirect_uri = os.getenv("AZURE_REDIRECT_URI")
 
 authority = f"https://login.microsoftonline.com/{tenant_id}"
 scopes = ["User.Read", "Mail.Send"]
