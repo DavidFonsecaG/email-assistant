@@ -21,11 +21,21 @@ if index_name not in [index.name for index in pc.list_indexes()]:
 # Connect to index
 index = pc.Index(index_name)
 
-def upsert_email_embedding(email_id, embedding, metadata):
-    index.upsert([
-        (email_id, embedding, metadata)
-    ])
+def upsert_email_embedding(email_id: str, embedding: list, metadata: dict):
+    # Add raw email body to metadata before upserting
+    vector = {
+        "id": email_id,
+        "values": embedding,
+        "metadata": metadata  # should include sender_name, sender_email, subject, body (full text!)
+    }
+    index.upsert(vectors=[vector])
 
-def query_similar_emails(embedding, top_k=1):
-    result = index.query(vector=embedding, top_k=top_k, include_metadata=True)
+def query_similar_emails(embedding, source="sent", top_k=5):
+    result = index.query(
+        vector=embedding,
+        top_k=top_k,
+        include_metadata=True,
+        filter={"source": source}
+    )
     return result
+
