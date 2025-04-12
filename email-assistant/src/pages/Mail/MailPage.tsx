@@ -1,4 +1,4 @@
-import Cookies from "node_modules/@types/js-cookie"
+import Cookies from "js-cookie"
 
 import { Mail } from "@/components/mail/mail"
 import { accounts, mails } from "@/pages/Mail/data"

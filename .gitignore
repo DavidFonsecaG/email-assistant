@@ -4,10 +4,11 @@ __pycache__/
 *.so
 
 # Virtual environments
-email-assistant-backend/venv
+venv
 
 # Environment variables
 email-assistant-backend/.env
+email-assistant-backend/db/emails.db
 
 # IDEs and editors
 .vscode/
