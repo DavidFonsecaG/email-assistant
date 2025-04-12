@@ -190,7 +190,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
       </div>
       <Separator />
       {mail ? (
-        <div className="flex flex-1 flex-col h-full">
+        <div className="flex flex-1 flex-col h-full overflow-hidden">
           <div className="overflow-auto">
             <div className="flex items-start p-4">
               <div className="flex items-start gap-4 text-sm">

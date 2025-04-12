@@ -12,7 +12,7 @@ export default function MailPage() {
 
   return (
     <>
-      <div className="flex-col md:flex overflow-hidden h-full">
+      <div className="flex-col md:flex overflow-hidden">
         <Mail
           accounts={accounts}
           mails={mails}
