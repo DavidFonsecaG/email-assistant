@@ -1,7 +1,7 @@
-import Cookies from "js-cookie"
+import Cookies from "node_modules/@types/js-cookie"
 
 import { Mail } from "@/components/mail/mail"
-import { accounts, mails } from "@/pages/mail/data"
+import { accounts, mails } from "@/pages/Mail/data"
 
 export default function MailPage() {
   const layout = Cookies.get("react-resizable-panels:layout:mail")

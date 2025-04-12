@@ -1,5 +1,5 @@
 import Header from "./components/header/header"
-import MailPage from "./pages/mail/MailPage"
+import MailPage from "./pages/Mail/MailPage"
 
 function App() {
   return (

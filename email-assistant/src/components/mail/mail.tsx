@@ -28,8 +28,8 @@ import { AccountSwitcher } from "@/components/mail/account-switcher"
 import { MailDisplay } from "@/components/mail/mail-display"
 import { MailList } from "@/components/mail/mail-list"
 import { Nav } from "@/components/mail/nav"
-import { type Mail } from "@/pages/mail/data"
-import { useMail } from "@/pages/mail/use-mail"
+import { type Mail } from "@/pages/Mail/data"
+import { useMail } from "@/pages/Mail/use-mail"
 
 interface MailProps {
   accounts: {

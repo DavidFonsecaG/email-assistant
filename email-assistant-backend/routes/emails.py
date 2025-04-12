@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Body, Depends
+from fastapi import APIRouter, Body, Depends, Query
 from sqlalchemy.orm import Session
 from datetime import datetime
 from db.database import SessionLocal
@@ -22,6 +22,13 @@ def get_db():
         yield db
     finally:
         db.close()
+
+@router.get("/emails")
+def get_emails(page: int = Query(1, ge=1), page_size: int = Query(20, ge=1), db: Session = Depends(get_db)):
+    offset = (page - 1) * page_size
+    emails = db.query(EmailTable).order_by(EmailTable.timestamp.desc()).offset(offset).limit(page_size).all()
+    return emails
+
 
 @router.post("/sync-received-emails")
 def sync_received_emails(token: str = Body(...), user_email: str = Body(...), db: Session = Depends(get_db)):

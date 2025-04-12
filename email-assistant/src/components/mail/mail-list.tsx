@@ -2,9 +2,9 @@ import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Mail } from "@/pages/mail/data"
-import { useMail } from "@/pages/mail/use-mail"
-import { formatDate } from "@/pages/mail/format-date"
+import { Mail } from "@/pages/Mail/data"
+import { useMail } from "@/pages/Mail/use-mail"
+import { formatDate } from "@/pages/Mail/format-date"
 
 interface MailListProps {
   items: Mail[]

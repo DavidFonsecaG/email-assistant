@@ -21,7 +21,7 @@ import {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="mr-2 h-8 w-8">
-                <AvatarImage src={`https://avatar.vercel.sh/some.png`} alt="email.ai" />
+                <AvatarImage src={`avatar.png`} alt="email.ai" />
                 <AvatarFallback>SC</AvatarFallback>
             </Avatar>
           </Button>

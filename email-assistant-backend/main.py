@@ -9,4 +9,3 @@ app.include_router(outlook_auth.router)
 @app.get("/")
 def read_root():
     return {"message": "Email Assistant"}
-
