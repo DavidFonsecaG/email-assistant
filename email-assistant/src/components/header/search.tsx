@@ -6,6 +6,7 @@ export function Search() {
       <Input
         type="search"
         placeholder="Search..."
+        name="search"
         className="md:w-[100px] lg:w-[300px]"
       />
     </div>

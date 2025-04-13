@@ -3,9 +3,9 @@ export type Mail = {
   sender_name: string;
   sender_email: string;
   subject: string;
-  body: string;
+  body_preview: string;
   timestamp: string;
-  read: boolean;
+  is_read: boolean;
   labels: string[];
 }
 

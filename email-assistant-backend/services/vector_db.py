@@ -1,5 +1,6 @@
 from pinecone import Pinecone, ServerlessSpec
 import os
+from typing import List, Dict
 
 # Initialize Pinecone client
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
@@ -39,3 +40,20 @@ def query_similar_emails(embedding, source="sent", top_k=5):
     )
     return result
 
+def query_email_embeddings(embedding: List[float], top_k: int = 5, filter: Dict = None):
+    query_params = {
+        "vector": embedding,
+        "top_k": top_k,
+        "include_values": False,
+        "include_metadata": True
+    }
+
+    if filter:
+        query_params["filter"] = filter
+
+    response = index.query(**query_params)
+
+    if not response.matches:
+        return {"matches": []}
+
+    return response.to_dict()

@@ -32,6 +32,8 @@ class EmailTable(Base):
     web_link = Column(String)  # Direct link to open in Outlook
     timestamp = Column(DateTime, default=datetime.utcnow)  # Best effort unified timestamp
     created_at = Column(DateTime, default=datetime.utcnow)
+    attachments = relationship("AttachmentTable", back_populates="email", cascade="all, delete-orphan")
+
 
 class AttachmentTable(Base):
     __tablename__ = "attachments"

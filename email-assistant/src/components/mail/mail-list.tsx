@@ -1,6 +1,6 @@
-import { ComponentProps } from "react"
+// import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Mail } from "@/pages/Mail/data"
 import { useMail } from "@/pages/Mail/use-mail"
@@ -12,7 +12,6 @@ interface MailListProps {
 
 export function MailList({ items }: MailListProps) {
   const [mail, setMail] = useMail()
-  console.log("--> ", items)
 
   return (
     <ScrollArea className="h-full">
@@ -21,7 +20,7 @@ export function MailList({ items }: MailListProps) {
           <button
             key={item.id}
             className={cn(
-              "flex flex-col items-start gap-2  border-y p-3 text-left text-sm transition-all hover:bg-accent",
+              "flex flex-col items-start gap-2 border-y first:border-t-0 p-3 text-left text-sm transition-all hover:bg-accent",
               mail.selected === item.id && "bg-muted"
             )}
             onClick={() =>
@@ -35,9 +34,9 @@ export function MailList({ items }: MailListProps) {
               <div className="flex items-center">
                 <div className="flex items-center gap-2">
                   <div className="font-semibold">{item.sender_name}</div>
-                  {/* {!item.read && (
+                  {!item.is_read && (
                     <span className="flex h-2 w-2 rounded-full bg-blue-600" />
-                  )} */}
+                  )}
                 </div>
                 <div
                   className={cn(
@@ -48,13 +47,12 @@ export function MailList({ items }: MailListProps) {
                   )}
                 >
                   {formatDate(item.timestamp)}
-                  {/* {item.timestamp} */}
                 </div>
               </div>
               <div className="text-xs font-medium">{item.subject}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
-              {item.body.substring(0, 300)}
+              {item.body_preview.substring(0, 300)}
             </div>
             {/* {item.labels.length ? (
               <div className="flex items-center gap-2">
@@ -72,16 +70,16 @@ export function MailList({ items }: MailListProps) {
   )
 }
 
-function getBadgeVariantFromLabel(
-  label: string
-): ComponentProps<typeof Badge>["variant"] {
-  if (["work"].includes(label.toLowerCase())) {
-    return "default"
-  }
+// function getBadgeVariantFromLabel(
+//   label: string
+// ): ComponentProps<typeof Badge>["variant"] {
+//   if (["work"].includes(label.toLowerCase())) {
+//     return "default"
+//   }
 
-  if (["personal"].includes(label.toLowerCase())) {
-    return "outline"
-  }
+//   if (["personal"].includes(label.toLowerCase())) {
+//     return "outline"
+//   }
 
-  return "secondary"
-}
+//   return "secondary"
+// }

@@ -219,7 +219,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
             </div>
             <Separator />
             <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-              {mail.body}
+              {mail.body_preview}
             </div>
           </div>
           <Separator className="mt-auto" />

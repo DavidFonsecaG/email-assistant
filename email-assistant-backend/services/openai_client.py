@@ -43,3 +43,10 @@ def suggest_draft_reply(query, sent_results, manual_facts):
         messages=[{"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content
+
+def generate_summary(prompt: str) -> str:
+    response = client.chat.completions.create(
+        model="gpt-4-0125-preview",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content
