@@ -20,8 +20,8 @@ import {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="mr-2 h-8 w-8">
-                <AvatarImage src={`avatar.png`} alt="email.ai" />
+            <Avatar className="mr-2 h-8 w-8 hover:shadow">
+                <AvatarImage src={`avatar.png`} alt={`avatar.png`} />
                 <AvatarFallback>SC</AvatarFallback>
             </Avatar>
           </Button>

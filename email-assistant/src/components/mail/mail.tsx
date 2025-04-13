@@ -163,7 +163,7 @@ export function Mail({
               <MailList items={mails} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.read)} />
+              {/* <MailList items={mails.filter((item) => !item.read)} /> */}
             </TabsContent>
           </Tabs>
         </ResizablePanel>

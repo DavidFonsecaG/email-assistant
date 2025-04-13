@@ -1,6 +1,8 @@
 import re
 import html
 from bs4 import BeautifulSoup
+from datetime import datetime
+from typing import List, Dict, Tuple
 
 def remove_html_tags(text):
     """
@@ -56,3 +58,17 @@ def clean_email_body(raw_body):
     text = remove_signature(text)
     text = remove_extra_whitespace(text)
     return text
+
+def extract_recipients(recipients: List[Dict]) -> Tuple[List[str], List[str]]:
+    emails = []
+    names = []
+    for rec in recipients:
+        email_data = rec.get("emailAddress", {})
+        emails.append(email_data.get("address", ""))
+        names.append(email_data.get("name", ""))
+    return emails, names
+
+def parse_timestamp(timestamp_str: str) -> datetime:
+    if timestamp_str:
+        return datetime.fromisoformat(timestamp_str.replace("Z", "+00:00"))
+    return datetime.utcnow()

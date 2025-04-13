@@ -6,13 +6,16 @@ const fetchEmails = async ({ pageParam = 1 }) => {
   return response.data;
 };
 
-export const useEmails = () => {
+const useEmails = () => {
   return useInfiniteQuery({
     queryKey: ['emails'],
     queryFn: fetchEmails,
+    initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const totalFetched = allPages.flatMap(page => page.emails).length;
       return totalFetched < lastPage.total ? allPages.length + 1 : undefined;
     },
   });
 };
+
+export default useEmails;

@@ -26,7 +26,6 @@ def login():
     auth_url = msal_app.get_authorization_request_url(
         scopes=["User.Read", "Mail.Read", "Mail.Send"],
         redirect_uri=redirect_uri,
-        prompt="consent"
     )
     return RedirectResponse(auth_url)
 

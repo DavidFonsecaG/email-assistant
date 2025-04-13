@@ -195,31 +195,31 @@ export function MailDisplay({ mail }: MailDisplayProps) {
             <div className="flex items-start p-4">
               <div className="flex items-start gap-4 text-sm">
                 <Avatar>
-                  <AvatarImage alt={mail.name} />
+                  <AvatarImage alt={mail.sender_name} />
                   <AvatarFallback>
-                    {mail.name
+                    {mail.sender_name
                       .split(" ")
                       .map((chunk) => chunk[0])
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
-                  <div className="font-semibold">{mail.name}</div>
+                  <div className="font-semibold">{mail.sender_name}</div>
                   <div className="line-clamp-1 text-xs">{mail.subject}</div>
                   <div className="line-clamp-1 text-xs">
-                    <span className="font-medium">Reply-To:</span> {mail.email}
+                    <span className="font-medium">Reply-To:</span> {mail.sender_email}
                   </div>
                 </div>
               </div>
-              {mail.date && (
+              {mail.timestamp && (
                 <div className="ml-auto text-xs text-muted-foreground">
-                  {format(new Date(mail.date), "PPpp")}
+                  {format(new Date(mail.timestamp), "PPpp")}
                 </div>
               )}
             </div>
             <Separator />
             <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-              {mail.text}
+              {mail.body}
             </div>
           </div>
           <Separator className="mt-auto" />
@@ -228,7 +228,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
               <div className="grid gap-4">
                 <Textarea
                   className="p-4"
-                  placeholder={`Reply ${mail.name}...`}
+                  placeholder={`Reply ${mail.sender_name}...`}
                 />
                 <div className="flex items-center">
                   <Label
