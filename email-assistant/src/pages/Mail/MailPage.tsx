@@ -15,7 +15,7 @@ export default function MailPage() {
   const mails = data?.pages.flatMap(page => page.emails) ?? [];
  
   return (
-    <div className="flex-col md:flex overflow-hidden">
+    <div className="flex-col md:flex overflow-auto">
       <Mail
         accounts={accounts}
         mails={mails}

@@ -42,10 +42,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Mail } from "@/pages/Mail/data"
+import { FullMail } from "@/pages/Mail/data"
 
 interface MailDisplayProps {
-  mail: Mail | null
+  mail: FullMail | null
 }
 
 export function MailDisplay({ mail }: MailDisplayProps) {
@@ -218,9 +218,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
               )}
             </div>
             <Separator />
-            <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-              {mail.body_preview}
-            </div>
+            <div className="flex-1 whitespace-pre-wrap p-4 text-sm" dangerouslySetInnerHTML={{ __html: mail.body_original }} />
           </div>
           <Separator className="mt-auto" />
           <div className="p-4">

@@ -9,7 +9,7 @@ import {
   Send,
   Trash2,
 } from "lucide-react"
-
+import { useEmailById } from '@/hooks/useEmailById';
 import { cn } from "@/lib/utils"
 import {
   ResizableHandle,
@@ -30,6 +30,7 @@ import { MailList } from "@/components/mail/mail-list"
 import { Nav } from "@/components/mail/nav"
 import { type Mail } from "@/pages/Mail/data"
 import { useMail } from "@/pages/Mail/use-mail"
+import { AiSidebar } from "./ai-sidebar";
 
 interface MailProps {
   accounts: {
@@ -52,6 +53,8 @@ export function Mail({
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const [mail] = useMail()
+  const { data: selectedEmail = null } = useEmailById(mail.selected)
+  console.log("--> selected: ", selectedEmail)
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -138,7 +141,9 @@ export function Mail({
             ]}
           />
         </ResizablePanel>
+
         <ResizableHandle withHandle />
+
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <Tabs defaultValue="all">
             <div className="flex items-center px-4 py-2">
@@ -163,16 +168,23 @@ export function Mail({
               <MailList items={mails} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
-              {/* <MailList items={mails.filter((item) => !item.read)} /> */}
+              <MailList items={mails.filter((item) => !item.is_read)} />
             </TabsContent>
           </Tabs>
         </ResizablePanel>
+
         <ResizableHandle withHandle />
+
         <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
           <MailDisplay
-            mail={mails.find((item) => item.id === mail.selected) || null}
+            mail={selectedEmail}
           />
         </ResizablePanel>
+
+        <Separator orientation = {"vertical"}/>
+
+        <AiSidebar/>
+
       </ResizablePanelGroup>
     </TooltipProvider>
   )
