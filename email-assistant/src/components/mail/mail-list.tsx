@@ -1,5 +1,6 @@
 // import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
+import { useNavigate, useParams } from "react-router-dom"
 // import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Mail } from "@/pages/Mail/data"
@@ -12,23 +13,23 @@ interface MailListProps {
 
 export function MailList({ items }: MailListProps) {
   const [mail, setMail] = useMail()
+  const { mailId } = useParams()
+  const navigate = useNavigate()
+
 
   return (
-    <ScrollArea className="h-screen">
-      <div className="flex flex-col">
+    // <ScrollArea className="">
+      <div className="flex flex-col h-full overflow-auto">
         {items.map((item) => (
           <button
             key={item.id}
             className={cn(
               "flex flex-col items-start gap-2 border-y first:border-t-0 p-3 text-left text-sm transition-all hover:bg-accent",
-              mail.selected === item.id && "bg-muted"
+              mailId === item.id && "bg-muted"
             )}
-            onClick={() =>
-              setMail({
-                ...mail,
-                selected: item.id,
-              })
-            }
+            onClick={() => {
+              navigate(`/mail/${item.id}`)
+            }}
           >
             <div className="flex w-full flex-col gap-1">
               <div className="flex items-center">
@@ -66,7 +67,7 @@ export function MailList({ items }: MailListProps) {
           </button>
         ))}
       </div>
-    </ScrollArea>
+    // </ScrollArea>
   )
 }
 

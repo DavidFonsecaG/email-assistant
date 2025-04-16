@@ -9,6 +9,7 @@ import {
   Send,
   Trash2,
 } from "lucide-react"
+import { useParams } from "react-router-dom";
 import { useEmailById } from '@/hooks/useEmailById';
 import { cn } from "@/lib/utils"
 import {
@@ -30,7 +31,7 @@ import { MailList } from "@/components/mail/mail-list"
 import { Nav } from "@/components/mail/nav"
 import { type Mail } from "@/pages/Mail/data"
 import { useMail } from "@/pages/Mail/use-mail"
-import { AiSidebar } from "./ai-sidebar";
+import { AiSidebar } from "@/components/mail/ai-sidebar";
 
 interface MailProps {
   accounts: {
@@ -52,8 +53,8 @@ export function Mail({
   navCollapsedSize,
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
-  const [mail] = useMail()
-  const { data: selectedEmail = null } = useEmailById(mail.selected)
+  const { mailId } = useParams()
+  const { data: selectedEmail = null } = useEmailById(mailId || "")
   console.log("--> selected: ", selectedEmail)
 
   return (
@@ -65,7 +66,7 @@ export function Mail({
             sizes
           )}`
         }}
-        className="h-full max-h-[800px] items-stretch"
+        className="flex h-full max-h-[800px] items-stretch"
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
@@ -145,7 +146,7 @@ export function Mail({
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-          <Tabs defaultValue="all">
+          <Tabs defaultValue="all" className="flex flex-col h-full">
             <div className="flex items-center px-4 py-2">
               <h2 className="text-l font-bold">Inbox</h2>
               <TabsList className="ml-auto">
@@ -164,7 +165,7 @@ export function Mail({
               </TabsList>
             </div>
             <Separator />
-            <TabsContent value="all" className="m-0">
+            <TabsContent value="all" className="m-0 flex flex-col h-full overflow-hidden">
               <MailList items={mails} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
