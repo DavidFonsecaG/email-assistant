@@ -1,9 +1,10 @@
 from pinecone import Pinecone, ServerlessSpec
 import os
 from typing import List, Dict
+from utils.env import get_env_var 
 
 # Initialize Pinecone client
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+pc = Pinecone(api_key=get_env_var("PINECONE_API_KEY"))
 
 index_name = "email-assistant"
 

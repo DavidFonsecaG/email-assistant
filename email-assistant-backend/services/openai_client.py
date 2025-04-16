@@ -1,9 +1,9 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from utils.env import get_env_var 
 
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=get_env_var("OPENAI_API_KEY"))
 
 def generate_embedding(text):
     response = client.embeddings.create(

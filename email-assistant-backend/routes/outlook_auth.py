@@ -1,16 +1,15 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
-from dotenv import load_dotenv
 import os
 from msal import ConfidentialClientApplication
+from utils.env import get_env_var 
 
-load_dotenv()
 router = APIRouter()
 
-client_id = os.getenv("AZURE_CLIENT_ID")
-client_secret = os.getenv("AZURE_CLIENT_SECRET")
-tenant_id = os.getenv("AZURE_TENANT_ID")
-redirect_uri = os.getenv("AZURE_REDIRECT_URI")
+client_id = get_env_var("AZURE_CLIENT_ID")
+client_secret = get_env_var("AZURE_CLIENT_SECRET")
+tenant_id = get_env_var("AZURE_TENANT_ID")
+redirect_uri = get_env_var("AZURE_REDIRECT_URI")
 
 authority = f"https://login.microsoftonline.com/{tenant_id}"
 scopes = ["User.Read", "Mail.Send"]
