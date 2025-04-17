@@ -98,6 +98,7 @@ def get_email_by_id(email_id: str, db: Session = Depends(get_db)):
         "recipient_emails": email.recipient_emails,
         "subject": email.subject,
         "body_original": email.body_original,
+        "thread_id": email.thread_id,
         "timestamp": email.timestamp.isoformat(),
         "has_attachments": email.has_attachments,
         "web_link": email.web_link
