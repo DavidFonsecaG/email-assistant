@@ -19,11 +19,16 @@ export type FullMail = {
   is_read: boolean;
   labels: string[];
   body_original: string;
+  thread_id: string;
   has_attachments: boolean;
   recipient_emails: string[];
   recipient_names: string[];
   source: string;
   web_link: string;
+}
+
+export type ThreadSummary = {
+  summary: string
 }
 
 export const accounts = [

@@ -30,7 +30,6 @@ import { MailDisplay } from "@/components/mail/mail-display"
 import { MailList } from "@/components/mail/mail-list"
 import { Nav } from "@/components/mail/nav"
 import { type Mail } from "@/pages/Mail/data"
-import { useMail } from "@/pages/Mail/use-mail"
 import { AiSidebar } from "@/components/mail/ai-sidebar";
 
 interface MailProps {
@@ -55,7 +54,6 @@ export function Mail({
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const { mailId } = useParams()
   const { data: selectedEmail = null } = useEmailById(mailId || "")
-  console.log("--> selected: ", selectedEmail)
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -177,14 +175,16 @@ export function Mail({
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-          <MailDisplay
-            mail={selectedEmail}
-          />
+          <MailDisplay mail={selectedEmail} />
         </ResizablePanel>
 
         <Separator orientation = {"vertical"}/>
 
-        <AiSidebar/>
+          {/* <div className="flex flex-col flex-grow h-full w-1/4">
+            <span>Hello</span>
+          </div> */}
+
+        <AiSidebar mail={selectedEmail} />
 
       </ResizablePanelGroup>
     </TooltipProvider>

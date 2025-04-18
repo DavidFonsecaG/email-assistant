@@ -118,3 +118,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .hover-spin-slow:hover {
+    animation: spin 6s linear infinite;
+  }
+}

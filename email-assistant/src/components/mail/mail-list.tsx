@@ -1,24 +1,17 @@
-// import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
-import { useNavigate, useParams } from "react-router-dom"
-// import { Badge } from "@/components/ui/badge"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Mail } from "@/pages/Mail/data"
-import { useMail } from "@/pages/Mail/use-mail"
 import { formatDate } from "@/pages/Mail/format-date"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface MailListProps {
   items: Mail[]
 }
 
 export function MailList({ items }: MailListProps) {
-  const [mail, setMail] = useMail()
   const { mailId } = useParams()
   const navigate = useNavigate()
 
-
   return (
-    // <ScrollArea className="">
       <div className="flex flex-col h-full overflow-auto">
         {items.map((item) => (
           <button
@@ -42,7 +35,7 @@ export function MailList({ items }: MailListProps) {
                 <div
                   className={cn(
                     "ml-auto text-xs font-semibold",
-                    mail.selected === item.id
+                    mailId === item.id
                       ? "text-foreground"
                       : "text-muted-foreground"
                   )}
@@ -55,32 +48,8 @@ export function MailList({ items }: MailListProps) {
             <div className="line-clamp-2 text-xs text-muted-foreground">
               {item.body_preview.substring(0, 300)}
             </div>
-            {/* {item.labels.length ? (
-              <div className="flex items-center gap-2">
-                {item.labels.map((label) => (
-                  <Badge key={label} variant={getBadgeVariantFromLabel(label)}>
-                    {label}
-                  </Badge>
-                ))}
-              </div>
-            ) : null} */}
           </button>
         ))}
       </div>
-    // </ScrollArea>
   )
 }
-
-// function getBadgeVariantFromLabel(
-//   label: string
-// ): ComponentProps<typeof Badge>["variant"] {
-//   if (["work"].includes(label.toLowerCase())) {
-//     return "default"
-//   }
-
-//   if (["personal"].includes(label.toLowerCase())) {
-//     return "outline"
-//   }
-
-//   return "secondary"
-// }

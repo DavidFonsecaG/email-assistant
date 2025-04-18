@@ -19,7 +19,11 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: 
+          "text-primary underline-offset-4 hover:underline",
+        ai:
+          "text-white bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-600 transition-all duration-900 ease-in-out rounded-full hover-spin-slow clip-transition hover:[clip-path:polygon(25%_6.7%,75%_6.7%,100%_50%,75%_93.3%,25%_93.3%,0%_50%)]"
+
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
