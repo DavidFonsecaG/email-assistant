@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {
   Archive,
@@ -140,7 +138,6 @@ export function Mail({
             ]}
           />
         </ResizablePanel>
-
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
@@ -171,18 +168,12 @@ export function Mail({
             </TabsContent>
           </Tabs>
         </ResizablePanel>
-
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
           <MailDisplay mail={selectedEmail} />
         </ResizablePanel>
-
         <Separator orientation = {"vertical"}/>
-
-          {/* <div className="flex flex-col flex-grow h-full w-1/4">
-            <span>Hello</span>
-          </div> */}
 
         <AiSidebar mail={selectedEmail} />
 
