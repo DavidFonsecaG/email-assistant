@@ -98,6 +98,7 @@ def get_email_by_id(email_id: str, db: Session = Depends(get_db)):
         "recipient_emails": email.recipient_emails,
         "subject": email.subject,
         "body_original": email.body_original,
+        "body_cleaned": email.body_cleaned,
         "thread_id": email.thread_id,
         "timestamp": email.timestamp.isoformat(),
         "has_attachments": email.has_attachments,
@@ -159,31 +160,19 @@ def summarize_thread(thread_id: str, user_email: str, db: Session = Depends(get_
         f"{email.sender_name}: {email.body_cleaned}" for email in emails if email.body_cleaned
     )
 
-    prompt = f"Summarize the following email conversation in a few sentences:\n\n{conversation_text}"
+    prompt = f"You're my email assistant. Summarize the following email conversation in as few sentences as possible. Keep it under 60 words:\n\n{conversation_text}"
     summary = generate_summary(prompt)
 
     return {"thread_id": thread_id, "summary": summary}
 
-@router.post("/query-emails")
-def query_emails(text: str = Body(...)):
-    # Step 1: Generate embedding from the input text
+@router.post("/emails/suggested_reply")
+def suggested_reply(text: str = Body(...)):
     embedding = generate_embedding(text)
-
-    # Step 2: Query Pinecone for sent emails
     sent_results = clean_results(query_similar_emails(embedding, source="sent"))
-
-    # Step 3: Check manual knowledge base
     manual_facts = query_knowledge_base(text)
-
-    # Step 5: Summarize intent (optional: with GPT)
-    intent_summary = summarize_intent(text)
-
-    # Step 6: Suggest a draft reply (combine past replies + manual facts)
     suggested_reply = suggest_draft_reply(text, sent_results, manual_facts)
 
     return {
-        "intent_summary": intent_summary,
-        "manual_facts": manual_facts,
         "matches_sent": sent_results,
         "suggested_reply": suggested_reply
     }

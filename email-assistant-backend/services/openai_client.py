@@ -25,7 +25,17 @@ def suggest_draft_reply(query, sent_results, manual_facts):
     facts = "\n".join(f"{k}: {v}" for k, v in manual_facts.items())
 
     prompt = f"""
-    You are my email assistant. Based on my previous replies and official facts, draft a reply to the following inquiry.
+    You're my email assistant. Reply to the inquiry using my tone, past replies, and the facts provided. Keep the message concise and professional.
+
+    Return your response in the following JSON format:
+
+    {{
+    "response": "Hi ,\\n\\n<response text>\\n\\nBest regards,\\n ",
+    "more_ideas": [
+        "Short one sentence alternative response topic 1. Keep it under 4 words.",
+        "Short one sentence alternative response topic 2. Keep it under 4 words."
+    ]
+    }}
 
     Inquiry:
     {query}
@@ -35,9 +45,8 @@ def suggest_draft_reply(query, sent_results, manual_facts):
 
     Official Facts:
     {facts}
-
-    Draft a polite and professional reply in my tone:
     """
+
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],

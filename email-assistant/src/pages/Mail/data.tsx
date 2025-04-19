@@ -9,28 +9,6 @@ export type Mail = {
   labels: string[];
 }
 
-export type FullMail = {
-  id: string;
-  sender_name: string;
-  sender_email: string;
-  subject: string;
-  body_preview: string;
-  timestamp: string;
-  is_read: boolean;
-  labels: string[];
-  body_original: string;
-  thread_id: string;
-  has_attachments: boolean;
-  recipient_emails: string[];
-  recipient_names: string[];
-  source: string;
-  web_link: string;
-}
-
-export type ThreadSummary = {
-  summary: string
-}
-
 export const accounts = [
   {
     label: "Alicia Koch",

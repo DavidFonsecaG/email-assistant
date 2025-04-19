@@ -42,7 +42,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { FullMail } from "@/pages/Mail/data"
+import { FullMail } from "@/hooks/useEmailById"
 
 interface MailDisplayProps {
   mail: FullMail | null

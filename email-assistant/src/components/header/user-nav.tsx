@@ -21,17 +21,17 @@ import {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="mr-2 h-8 w-8 hover:shadow">
-                <AvatarImage src={`avatar.png`} alt={`avatar.png`} />
-                <AvatarFallback>SC</AvatarFallback>
+                <AvatarImage src={``} alt={`avatar.png`} />
+                <AvatarFallback>TC</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">David</p>
+              <p className="text-sm font-medium leading-none">Tim</p>
               <p className="text-xs leading-none text-muted-foreground">
-                david@example.com
+                tcook@example.com
               </p>
             </div>
           </DropdownMenuLabel>

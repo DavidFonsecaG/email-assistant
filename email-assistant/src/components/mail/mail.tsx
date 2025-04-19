@@ -7,8 +7,8 @@ import {
   Send,
   Trash2,
 } from "lucide-react"
-import { useParams } from "react-router-dom";
-import { useEmailById } from '@/hooks/useEmailById';
+import { useParams } from "react-router-dom"
+import { useEmailById } from '@/hooks/useEmailById'
 import { cn } from "@/lib/utils"
 import {
   ResizableHandle,
@@ -28,7 +28,7 @@ import { MailDisplay } from "@/components/mail/mail-display"
 import { MailList } from "@/components/mail/mail-list"
 import { Nav } from "@/components/mail/nav"
 import { type Mail } from "@/pages/Mail/data"
-import { AiSidebar } from "@/components/mail/ai-sidebar";
+import { AiSidebar } from "@/components/ai-assistant/ai-sidebar"
 
 interface MailProps {
   accounts: {
