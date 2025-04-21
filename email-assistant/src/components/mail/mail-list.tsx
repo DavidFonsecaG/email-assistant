@@ -12,12 +12,12 @@ export function MailList({ items }: MailListProps) {
   const navigate = useNavigate()
 
   return (
-      <div className="flex flex-col h-full overflow-auto">
+      <div className="flex flex-col h-full gap-2 p-4 pt-0 overflow-auto">
         {items.map((item) => (
           <button
             key={item.id}
             className={cn(
-              "flex flex-col items-start gap-2 border-y first:border-t-0 p-3 text-left text-sm transition-all hover:bg-accent",
+              "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
               mailId === item.id && "bg-muted"
             )}
             onClick={() => {

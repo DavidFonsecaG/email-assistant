@@ -8,7 +8,7 @@ import {
 import { CardsChat } from "@/components/ai-assistant/chat"
 import { Separator } from "@/components/ui/separator"
 import { FullMail } from '@/hooks/useEmailById'
-import { useSummaryByThreadId } from '@/hooks/useSummaryByThreadId'
+import { useSummaryByEmailId } from '@/hooks/useSummaryByEmailId'
 import { useSuggestedReply } from '@/hooks/useSuggestedReply'
 
 
@@ -18,10 +18,9 @@ interface AiSidebarProps {
 
 export function AiSidebar({ mail }: AiSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(true)
-  
-  const { data: threadSummary = null } = useSummaryByThreadId(!isCollapsed && mail?.thread_id ? mail.thread_id : null)
+  const { data: threadSummary = null } = useSummaryByEmailId(!isCollapsed && mail?.id ? mail.id : null)
   const { data: replyData = null } = useSuggestedReply(!isCollapsed && mail?.body_original ? mail.body_original : null)
-  console.log("-->", replyData)
+  
   return (
     <>
       {!isCollapsed && (

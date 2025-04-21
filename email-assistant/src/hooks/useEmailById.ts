@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export interface FullMail {
 	id: string;
+	user_email: string;
 	sender_name: string;
 	sender_email: string;
 	subject: string;

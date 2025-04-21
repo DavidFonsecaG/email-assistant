@@ -10,6 +10,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
+import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 
 interface SuggestedReply {
   response: string
@@ -44,6 +45,7 @@ export function CardsChat({ summary, suggested_reply, setIsCollapsed }: CardsCha
   ])
   const [input, setInput] = useState("")
   const inputLength = input.trim().length
+
   return (
     <>
       <div className="flex flex-col flex-grow h-full w-1/4 transition-all duration-1000 ease-in-out">
@@ -61,75 +63,75 @@ export function CardsChat({ summary, suggested_reply, setIsCollapsed }: CardsCha
 
         <div className="flex flex-col h-full bg-accent overflow-hidden">
           <div className="flex-grow space-y-4 p-4 overflow-auto">
-            
-            <div className="flex gap-2 rounded-lg px-3 py-2 text-sm ml-auto bg-popover">
-              <div>
+
+            <Card className="text-sm">
+              <CardHeader className="flex-row space-x-2">
                 <Avatar className="h-6 w-6">
                   <AvatarImage src="/avatar.png" alt={`avatar.png`} />
-                  <AvatarFallback>SC</AvatarFallback>
+                  <AvatarFallback>AI</AvatarFallback>
                 </Avatar>
-              </div>
-              <div className="flex flex-col flex-grow gap-2 rounded-lg text-sm ml-auto bg-popover">
-                <h5 className="font-semibold">Summary</h5>
+                <span className="font-semibold">Summary</span>
+              </CardHeader>
+              <CardContent className="pl-10">
                 {summary ? 
                   <p className="font-normal leading-snug text-muted-foreground">"{summary}"</p> 
-                  : (
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-3/4" />
-                      <Skeleton className="h-4 w-5/6" />
-                      <Skeleton className="h-4 w-2/3" />
-                    </div>
-                  )}
-              </div>
-            </div>
+                : (
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-5/6" />
+                    <Skeleton className="h-4 w-2/3" />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
-            <div className="flex gap-2 rounded-lg px-3 py-2 text-sm ml-auto bg-popover">
-              <div>
+            <Card className="text-sm">
+              <CardHeader className="flex-row space-x-2">
                 <Avatar className="h-6 w-6">
                   <AvatarImage src="/avatar.png" alt={`avatar.png`} />
-                  <AvatarFallback>SC</AvatarFallback>
+                  <AvatarFallback>AI</AvatarFallback>
                 </Avatar>
-              </div>
-              <div className="flex flex-col flex-grow gap-2 rounded-lg text-sm ml-auto bg-popover">
-                <h5 className="font-semibold">Suggested Reply:</h5>
-                {suggested_reply ?
-                  <div className="flex flex-col items-start wrap-anywhere space-y-2">
-                    <p className="font-normal leading-snug text-muted-foreground whitespace-pre-line overflow-hidden text-clip">{suggested_reply.response}</p>
-                    <div>
-                      <Button
-                        onClick={(e) => e.preventDefault()}
-                        size="xs"
-                        className="ml-auto text-xs font-normal"
-                      >
-                        Insert
-                      </Button>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-xs text-muted-foreground">More ideas:</span>
-                      {suggested_reply.more_ideas.map((idea, index) =>
-                      <div>
-                        <Button
-                          key={index}
-                          onClick={(e) => e.preventDefault()}
-                          size="xs"
-                          className="ml-auto text-xs font-normal"
-                          variant={"outline"}
-                        >
-                          {idea}
-                        </Button>
-                      </div>
-                      )}
-                    </div>
+                <span className="font-semibold">Suggested Reply</span>
+              </CardHeader>
+              <CardContent className="pl-10">
+                {suggested_reply ? 
+                  <p className="font-normal leading-snug text-muted-foreground whitespace-pre-line">"{suggested_reply.response}"</p> 
+                : (
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-5/6" />
+                    <Skeleton className="h-4 w-2/3" />
                   </div>
-                  : (
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-3/4" />
-                      <Skeleton className="h-4 w-5/6" />
-                      <Skeleton className="h-4 w-2/3" />
-                    </div>
+                )}
+              </CardContent>
+              <CardFooter className="flex-col pl-10">
+                <div>
+                  <Button
+                    onClick={(e) => e.preventDefault()}
+                    size="xs"
+                    className="ml-auto text-xs font-normal"
+                  >
+                    Insert
+                  </Button>
+                </div>
+                <div className="space-y-1 mt-2">
+                  <span className="text-xs text-muted-foreground">More ideas:</span>
+                  {suggested_reply?.more_ideas.map((idea, index) =>
+                  <div>
+                    <Button
+                      key={index}
+                      onClick={(e) => e.preventDefault()}
+                      size="xs"
+                      className="ml-auto text-xs font-normal"
+                      variant={"outline"}
+                    >
+                      {idea}
+                    </Button>
+                  </div>
                   )}
-              </div>
-            </div>
+                </div> 
+              </CardFooter>
+            </Card>
 
             {messages.map((message, index) => (
               <div

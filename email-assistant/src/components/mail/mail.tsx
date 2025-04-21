@@ -4,12 +4,14 @@ import {
   ArchiveX,
   File,
   Inbox,
+  Search,
   Send,
   Trash2,
 } from "lucide-react"
 import { useParams } from "react-router-dom"
 import { useEmailById } from '@/hooks/useEmailById'
 import { cn } from "@/lib/utils"
+import { Input } from "@/components/ui/input"
 import {
   ResizableHandle,
   ResizablePanel,
@@ -95,7 +97,7 @@ export function Mail({
           >
             <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
           </div>
-          <Separator />
+          {/* <Separator /> */}
           <Nav
             isCollapsed={isCollapsed}
             links={[
@@ -143,7 +145,7 @@ export function Mail({
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <Tabs defaultValue="all" className="flex flex-col h-full">
             <div className="flex items-center px-4 py-2">
-              <h2 className="text-l font-bold">Inbox</h2>
+              <h2 className="text-xl font-bold">Inbox</h2>
               <TabsList className="ml-auto">
                 <TabsTrigger
                   value="all"
@@ -159,7 +161,14 @@ export function Mail({
                 </TabsTrigger>
               </TabsList>
             </div>
-            <Separator />
+            <div className="bg-background/95 p-4 pt-0 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+              <form>
+                <div className="relative">
+                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input type="search" placeholder="Search" name="search" className="pl-8" />
+                </div>
+              </form>
+            </div>
             <TabsContent value="all" className="m-0 flex flex-col h-full overflow-hidden">
               <MailList items={mails} />
             </TabsContent>

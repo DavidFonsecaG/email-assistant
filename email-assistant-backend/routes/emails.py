@@ -91,6 +91,7 @@ def get_email_by_id(email_id: str, db: Session = Depends(get_db)):
 
     return {
         "id": email.id,
+        "user_email": email.user_email,
         "source": email.source,
         "sender_name": email.sender_name,
         "sender_email": email.sender_email,
@@ -144,26 +145,44 @@ def summarize_email(email_id: str, db: Session = Depends(get_db)):
 
     return {"email_id": email_id, "summary": summary}
 
-@router.get("/emails/thread/{thread_id}/summary")
-def summarize_thread(thread_id: str, user_email: str, db: Session = Depends(get_db)):
+@router.get("/emails/{email_id}/sender-summary")
+def summarize_conversation_from_sender_email(email_id: str, db: Session = Depends(get_db)):
+    email = db.query(EmailTable).filter(EmailTable.id == email_id).first()
+
+    if not email:
+        raise HTTPException(status_code=404, detail="Email not found")
+
+    sender_email = email.sender_email
+    user_email = email.user_email
+
     emails = (
         db.query(EmailTable)
-        .filter(EmailTable.user_email == user_email, EmailTable.thread_id == thread_id)
+        .filter(
+            EmailTable.user_email == user_email,
+            EmailTable.sender_email == sender_email
+        )
         .order_by(EmailTable.timestamp.asc())
         .all()
     )
 
     if not emails:
-        raise HTTPException(status_code=404, detail="Thread not found")
+        raise HTTPException(status_code=404, detail="No emails found from this sender.")
 
     conversation_text = "\n\n".join(
         f"{email.sender_name}: {email.body_cleaned}" for email in emails if email.body_cleaned
     )
 
-    prompt = f"You're my email assistant. Summarize the following email conversation in as few sentences as possible. Keep it under 60 words:\n\n{conversation_text}"
+    prompt = (
+        "You're my email assistant. Summarize the following email conversation "
+        "in as few sentences as possible. Keep it under 60 words:\n\n"
+        f"{conversation_text}"
+    )
     summary = generate_summary(prompt)
 
-    return {"thread_id": thread_id, "summary": summary}
+    return {
+        "sender_email": sender_email,
+        "summary": summary
+    }
 
 @router.post("/emails/suggested_reply")
 def suggested_reply(text: str = Body(...)):

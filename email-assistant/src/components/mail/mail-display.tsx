@@ -188,7 +188,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Separator />
+      {/* <Separator /> */}
       {mail ? (
         <div className="flex flex-1 flex-col h-full overflow-hidden">
           <div className="overflow-auto">
@@ -220,7 +220,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
             <Separator />
             <div className="flex-1 whitespace-pre-wrap p-4 text-sm" dangerouslySetInnerHTML={{ __html: mail.body_original }} />
           </div>
-          <Separator className="mt-auto" />
+          {/* <Separator className="mt-auto" />
           <div className="p-4">
             <form>
               <div className="grid gap-4">
@@ -246,7 +246,7 @@ export function MailDisplay({ mail }: MailDisplayProps) {
                 </div>
               </div>
             </form>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="p-8 text-center text-muted-foreground">
