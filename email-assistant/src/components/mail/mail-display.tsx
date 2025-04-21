@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 import { addDays } from "date-fns/addDays"
 import { addHours } from "date-fns/addHours"
 import { format } from "date-fns/format"
@@ -53,7 +54,11 @@ export function MailDisplay({ mail }: MailDisplayProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center p-2">
+      <div 
+        className={cn(
+          "flex items-center p-2",
+          !mail && "bg-muted border-b"
+        )}>
         <div className="flex items-center gap-2">
           <Tooltip>
             <TooltipTrigger asChild>
@@ -172,7 +177,6 @@ export function MailDisplay({ mail }: MailDisplayProps) {
             <TooltipContent>Forward</TooltipContent>
           </Tooltip>
         </div>
-        <Separator orientation="vertical" className="mx-2 h-6" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" disabled={!mail}>
@@ -188,36 +192,38 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {/* <Separator /> */}
       {mail ? (
         <div className="flex flex-1 flex-col h-full overflow-hidden">
           <div className="overflow-auto">
-            <div className="flex items-start p-4">
-              <div className="flex items-start gap-4 text-sm">
-                <Avatar>
-                  <AvatarImage alt={mail.sender_name} />
-                  <AvatarFallback>
-                    {mail.sender_name
-                      .split(" ")
-                      .map((chunk) => chunk[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="grid gap-1">
-                  <div className="font-semibold">{mail.sender_name}</div>
-                  <div className="line-clamp-1 text-xs">{mail.subject}</div>
-                  <div className="line-clamp-1 text-xs">
-                    <span className="font-medium">Reply-To:</span> {mail.sender_email}
+            <div className="flex flex-col space-y-3 items-start p-4 pt-0 border-b">
+              <div className="line-clamp-1 font-semibold text-lg">{mail.subject}</div>
+              <div className="flex w-full">
+                <div className="flex items-start gap-4 text-sm">
+                  <Avatar>
+                    <AvatarImage alt={mail.sender_name} />
+                    <AvatarFallback>
+                      {mail.sender_name
+                        .split(" ")
+                        .map((chunk) => chunk[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid gap-1">
+                    <div className="font-semibold">{mail.sender_name}</div>
+                    <div className="line-clamp-1 text-xs">
+                      <span className="font-medium">To:</span> {mail.recipient_emails}
+                    </div>
                   </div>
                 </div>
+                {mail.timestamp && (
+                  <div className="ml-auto text-xs text-muted-foreground">
+                    {format(new Date(mail.timestamp), "PPpp")}
+                  </div>
+                )}
+
               </div>
-              {mail.timestamp && (
-                <div className="ml-auto text-xs text-muted-foreground">
-                  {format(new Date(mail.timestamp), "PPpp")}
-                </div>
-              )}
+
             </div>
-            <Separator />
             <div className="flex-1 whitespace-pre-wrap p-4 text-sm" dangerouslySetInnerHTML={{ __html: mail.body_original }} />
           </div>
           {/* <Separator className="mt-auto" />
@@ -249,8 +255,8 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </div> */}
         </div>
       ) : (
-        <div className="p-8 text-center text-muted-foreground">
-          No message selected
+        <div className="flex-grow grid min-h-full place-items-center text-muted-foreground text-2xl font-semibold">
+            No Message Selected
         </div>
       )}
     </div>

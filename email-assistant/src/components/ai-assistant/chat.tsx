@@ -72,7 +72,7 @@ export function CardsChat({ summary, suggested_reply, setIsCollapsed }: CardsCha
                 </Avatar>
                 <span className="font-semibold">Summary</span>
               </CardHeader>
-              <CardContent className="pl-10">
+              <CardContent className="pl-10 text-xs">
                 {summary ? 
                   <p className="font-normal leading-snug text-muted-foreground">"{summary}"</p> 
                 : (
@@ -93,7 +93,7 @@ export function CardsChat({ summary, suggested_reply, setIsCollapsed }: CardsCha
                 </Avatar>
                 <span className="font-semibold">Suggested Reply</span>
               </CardHeader>
-              <CardContent className="pl-10">
+              <CardContent className="pl-10 text-xs">
                 {suggested_reply ? 
                   <p className="font-normal leading-snug text-muted-foreground whitespace-pre-line">"{suggested_reply.response}"</p> 
                 : (
@@ -105,31 +105,39 @@ export function CardsChat({ summary, suggested_reply, setIsCollapsed }: CardsCha
                 )}
               </CardContent>
               <CardFooter className="flex-col pl-10">
-                <div>
-                  <Button
-                    onClick={(e) => e.preventDefault()}
-                    size="xs"
-                    className="ml-auto text-xs font-normal"
-                  >
-                    Insert
-                  </Button>
-                </div>
-                <div className="space-y-1 mt-2">
-                  <span className="text-xs text-muted-foreground">More ideas:</span>
-                  {suggested_reply?.more_ideas.map((idea, index) =>
-                  <div>
-                    <Button
-                      key={index}
-                      onClick={(e) => e.preventDefault()}
-                      size="xs"
-                      className="ml-auto text-xs font-normal"
-                      variant={"outline"}
-                    >
-                      {idea}
-                    </Button>
+                {suggested_reply ?
+                  <>
+                    <div>
+                      <Button
+                        onClick={(e) => e.preventDefault()}
+                        size="xs"
+                        className="ml-auto text-xs font-normal"
+                      >
+                        Insert
+                      </Button>
+                    </div>
+                    <div className="space-y-1 mt-2">
+                      <span className="text-xs text-muted-foreground">More ideas:</span>
+                      {suggested_reply?.more_ideas.map((idea, index) =>
+                      <div>
+                        <Button
+                          key={index}
+                          onClick={(e) => e.preventDefault()}
+                          size="xs"
+                          className="ml-auto text-xs font-normal"
+                          variant={"outline"}
+                        >
+                          {idea}
+                        </Button>
+                      </div>
+                      )}
+                    </div>
+                  </> 
+                : (
+                  <div className="space-y-2">
+                    <Skeleton className="h-7 w-1/4" />
                   </div>
-                  )}
-                </div> 
+                )} 
               </CardFooter>
             </Card>
 

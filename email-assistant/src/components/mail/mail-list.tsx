@@ -43,7 +43,7 @@ export function MailList({ items }: MailListProps) {
                   {formatDate(item.timestamp)}
                 </div>
               </div>
-              <div className="text-xs font-medium">{item.subject}</div>
+              <div className="line-clamp-1 text-xs font-medium">{item.subject}</div>
             </div>
             <div className="line-clamp-2 text-xs text-muted-foreground">
               {item.body_preview.substring(0, 300)}

@@ -97,7 +97,6 @@ export function Mail({
           >
             <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
           </div>
-          {/* <Separator /> */}
           <Nav
             isCollapsed={isCollapsed}
             links={[
@@ -145,7 +144,7 @@ export function Mail({
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <Tabs defaultValue="all" className="flex flex-col h-full">
             <div className="flex items-center px-4 py-2">
-              <h2 className="text-xl font-bold">Inbox</h2>
+              <h2 className="text-xl font-semibold">Inbox</h2>
               <TabsList className="ml-auto">
                 <TabsTrigger
                   value="all"
