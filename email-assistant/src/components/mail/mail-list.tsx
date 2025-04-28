@@ -1,15 +1,48 @@
+import { useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { Mail } from "@/pages/Mail/data"
 import { formatDate } from "@/pages/Mail/format-date"
 import { useNavigate, useParams } from "react-router-dom"
 
 interface MailListProps {
-  items: Mail[]
+  items: Mail[];
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
 }
 
-export function MailList({ items }: MailListProps) {
+export function MailList({
+  items,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage
+}: MailListProps) {
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const { mailId } = useParams()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { rootMargin: "200px" } // Start loading when 200px away
+    );
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
       <div className="flex flex-col h-full gap-2 p-4 pt-0 overflow-auto">
@@ -50,6 +83,14 @@ export function MailList({ items }: MailListProps) {
             </div>
           </button>
         ))}
+
+      {/* Sentinel for IntersectionObserver */}
+      <div ref={loadMoreRef} className="h-8" />
+
+      {isFetchingNextPage && (
+        <div className="text-center p-4 text-gray-400">Loading more emails...</div>
+      )}
+
       </div>
   )
 }

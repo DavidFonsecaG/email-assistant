@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import emails, outlook_auth
-from background import email_sync
+from background.email_sync import register_background_tasks
 
 app = FastAPI()
 
@@ -12,6 +12,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+register_background_tasks(app)
 
 app.include_router(emails.router)
 app.include_router(outlook_auth.router)

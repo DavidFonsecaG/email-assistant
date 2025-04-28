@@ -42,6 +42,9 @@ interface MailProps {
   defaultLayout: number[] | undefined
   defaultCollapsed?: boolean
   navCollapsedSize: number
+  fetchNextPage: () => void
+  hasNextPage: boolean
+  isFetchingNextPage: boolean
 }
 
 export function Mail({
@@ -50,6 +53,9 @@ export function Mail({
   defaultLayout = [15, 32, 53],
   defaultCollapsed = false,
   navCollapsedSize,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
   const { mailId } = useParams()
@@ -169,10 +175,19 @@ export function Mail({
               </form>
             </div>
             <TabsContent value="all" className="m-0 flex flex-col h-full overflow-hidden">
-              <MailList items={mails} />
+              <MailList 
+                items={mails} 
+                fetchNextPage={fetchNextPage} 
+                hasNextPage={hasNextPage} 
+                isFetchingNextPage={isFetchingNextPage} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.is_read)} />
+              <MailList 
+                items={mails.filter((item) => !item.is_read)}
+                fetchNextPage={fetchNextPage} 
+                hasNextPage={hasNextPage} 
+                isFetchingNextPage={isFetchingNextPage} 
+                />
             </TabsContent>
           </Tabs>
         </ResizablePanel>

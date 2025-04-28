@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button"
 
 export default function OutlookLoginButton() {
@@ -9,8 +8,9 @@ export default function OutlookLoginButton() {
   return (
     <Button
       onClick={handleLogin}
-    //   className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+      variant="outline" className="w-full"
     >
+      <img src="https://maxcdn.icons8.com/filters/icons/Windows-Logo.svg" alt="logo"></img>
       Sign in with Outlook
     </Button>
   );
