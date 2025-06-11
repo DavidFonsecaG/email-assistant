@@ -18,6 +18,7 @@ email-assistant-backend/db/emails.db
 # Logs and databases
 *.log
 *.sqlite3
+*.db
 
 # Testing and analysis
 .pytest_cache/
